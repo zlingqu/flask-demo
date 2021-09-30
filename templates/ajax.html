@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <h1>Ajax</h1>
+    <div id="test">Show data count:</div>
+    <script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+     $(document).ready(function(){
+       $.getJSON('/ajax',function(data){
+     $('#test').append('<span class="badge">'+data.count+'</span>');
+       });
+     });
+    </script>
+  </body>
+</html>
