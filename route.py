@@ -52,7 +52,7 @@ def create_app():
 
 
     @app.route("/test",methods=["GET","POST"])
-    def post():
+    def test():
         headerMap={}
         for i in request.headers: #将header转为map类型
             headerMap[i[0]]=i[1]
@@ -73,9 +73,9 @@ def create_app():
             "shallow":request.shallow,
             "view_args":request.view_args,
             "url_rule":str(request.url_rule),
-            "environ": str(request.environ)
+            "environ": str(request.environ),
+            "endpoint--视图函数名": request.endpoint
         }
-        # print(request.__dict__)
         return json.dumps(msg,ensure_ascii=False)
 
     # 返回post的body数据
