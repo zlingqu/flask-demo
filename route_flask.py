@@ -1,4 +1,4 @@
-from flask import request, redirect, abort, Response, make_response, session
+from flask import request, redirect, abort, make_response, session
 from flask import render_template
 import json
 from werkzeug.utils import secure_filename
@@ -25,6 +25,7 @@ def add_route(app):
     def root():
         url = "/index"
         return redirect(url)  # 重定向，参数直接写对应的路径名即可
+
 
     @app.route('/center/add', methods=["GET", "POST"])  # 代表个人中心页
     def center():  # 视图函数

@@ -1,0 +1,5 @@
+Flask==0.12
+Flask-RESTful==0.3.5
+werkzeug==0.16
+gevent==22.10.2
+greenlet==2.0.2

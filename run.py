@@ -1,7 +1,6 @@
 from flask import Flask
-
-# from route_flask import add_route
-# from route_flask import add_route
+from werkzeug import serving
+from gevent import pywsgi
 
 app = Flask(__name__,
             static_url_path="/python",  # 静态资源的url前缀，默认是static
@@ -18,9 +17,15 @@ from route_flask_restful import add_route  # 使用flask_restful管理路由
 
 add_route(app)
 
+
+@serving.run_with_reloader
+def run_server():
+    app.debug = True
+
+    server = pywsgi.WSGIServer(
+        listener = ('0.0.0.0', 8888),
+        application=app)
+    server.serve_forever()
+
 if __name__ == '__main__':
-    a = "xx_yy_zz"
-    b = a.split('_', 1)[1]
-    print(b)
-    # print(app.url_map)  # 通过url_map可以查看整个flask中的路由信息
-    app.run(port=80)
+    run_server()
