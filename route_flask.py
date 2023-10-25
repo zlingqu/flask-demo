@@ -1,6 +1,5 @@
-from flask import request, redirect, abort, make_response, session
+from flask import request, redirect, abort, make_response, session, jsonify
 from flask import render_template
-import json
 from werkzeug.utils import secure_filename
 
 
@@ -37,9 +36,17 @@ def add_route(app):
                  "age": age,
                  "hoddy": hobby}
             # return "姓名：%s 年龄：%s 爱好：%s" % (name, age, hobby)
-            return json.dumps(t, ensure_ascii=False)
+            return jsonify(t, ensure_ascii=False)
         if request.method == "POST":
-            return json.dumps({"message": "请求方法是post，返回错误"}, ensure_ascii=False)
+            return jsonify({"message": "请求方法是post，返回错误"}, ensure_ascii=False)
+
+    @app.route("/header", methods=["GET", "POST"])
+    def head():
+        headerMap = {} 
+        for i in request.headers:  # 将header转为map类型
+            headerMap[i[0]] = i[1]
+        headerMap['remote_addr'] = request.remote_addr
+        return jsonify(headerMap)
 
     @app.route("/test", methods=["GET", "POST"])
     def test():
@@ -66,7 +73,7 @@ def add_route(app):
             "environ": str(request.environ),
             "endpoint--视图函数名": request.endpoint
         }
-        return json.dumps(msg, ensure_ascii=False)
+        return jsonify(msg, ensure_ascii=False)
 
     # 返回post的body数据
     @app.route("/data/", methods=["POST"])
@@ -83,7 +90,7 @@ def add_route(app):
         name = form.get("name")  # 获取表单的单个值
         age = form.get("age")
         # return F"{name},{age}"
-        return json.dumps(form.to_dict())  # to_dict()方法将表单转换为map
+        return jsonify(form.to_dict())  # to_dict()方法将表单转换为map
         # return json.dumps(dict(form.lists()))
 
     # 获取请求中的cookies信息

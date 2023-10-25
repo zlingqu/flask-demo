@@ -8,4 +8,4 @@ RUN pip install --upgrade pip \
 CMD ["python3", "run.py"]
 # CMD ["sleep", "360000000"]
 
-# docker build --platform=linux/amd64 -t ncr.nie.netease.com/ccbaseimage/flask-demo-mengzi:v0.5 .
+# docker build --platform=linux/amd64 -t ncr.nie.netease.com/ccbaseimage/flask-demo-mengzi:v0.6 .
