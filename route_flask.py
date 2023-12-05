@@ -36,9 +36,9 @@ def add_route(app):
                  "age": age,
                  "hoddy": hobby}
             # return "姓名：%s 年龄：%s 爱好：%s" % (name, age, hobby)
-            return jsonify(t, ensure_ascii=False)
+            return jsonify(t)
         if request.method == "POST":
-            return jsonify({"message": "请求方法是post，返回错误"}, ensure_ascii=False)
+            return jsonify({"message": "请求方法是post，返回错误"})
 
     @app.route("/header", methods=["GET", "POST"])
     def head():
@@ -48,7 +48,7 @@ def add_route(app):
         headerMap['remote_addr'] = request.remote_addr
         return jsonify(headerMap)
 
-    @app.route("/test", methods=["GET", "POST"])
+    @app.route("/test/", methods=["GET", "POST"])
     def test():
         headerMap = {}
         for i in request.headers:  # 将header转为map类型
@@ -73,7 +73,7 @@ def add_route(app):
             "environ": str(request.environ),
             "endpoint--视图函数名": request.endpoint
         }
-        return jsonify(msg, ensure_ascii=False)
+        return jsonify(msg)
 
     # 返回post的body数据
     @app.route("/data/", methods=["POST"])
@@ -144,3 +144,31 @@ def add_route(app):
     @app.errorhandler(404)
     def error(msg):
         return F"访问的页面不存在，{msg}"
+    
+    # 一个模拟接口
+    @app.route("/hardware/")
+    def hardware():
+        msg = {
+            "cpu": {
+                "model": "Intel(R) Xeon(R) CPU E5-2630 v3 @ 2.40GHz",
+                "cpu_cores": 16,
+                "cpu_count": 2,
+                "cpu_logic_cores": 32,
+                "cpu_has_ht": 1
+            },
+            "memory": {
+                "mem_size": 103079215104,
+                "slot_total": 16,
+                "slot_used": 6
+            },
+            "disk": {
+                "disk_size": 644245100000,
+                "disk_logic_size": 299966960000,
+                "is_raid": True,
+                "raid_name": "Smart HBA H244br"
+            },
+            "power": {
+                "count": "-"
+            }
+        }
+        return jsonify(msg)
