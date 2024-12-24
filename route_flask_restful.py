@@ -28,7 +28,7 @@ def add_route(app):
             hostname = socket.gethostname()
             ip_address = socket.gethostbyname(hostname)
             print(ip_address)
-            return {'ip2': ip_address}
+            return {'ip': ip_address}
     
     class GetHostname(Resource):
         def get(self):
