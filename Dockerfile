@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 python:3.6.13-buster
+FROM --platform=linux/amd64 python:3.13.0
 
 WORKDIR /app
 ADD . .
