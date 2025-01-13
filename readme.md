@@ -1,4 +1,6 @@
-# 1 介绍
+# flask-demo
+
+## 1 介绍
 
 提供一些常见接口，特别是在以下场景特别有用：
 
@@ -7,13 +9,13 @@
 3. apisix等作为反向代理，主动注入了一些header，想看下是否符合预期
 4. 其他情况
 
-# 2 部署
+## 2 部署
 
 k8s 部署参考 k8s-deployment.yaml
 
-# 3 测试
+## 3 测试
 
-## 3.1 http测试
+### 3.1 http测试
 
 ```bash
 # 获取header
@@ -48,11 +50,11 @@ curl https://****.com/hostname
 比如测试多副本运行的情况下，负载均衡情况
 ```
 
-## 3.2 HTML测试
+### 3.2 HTML测试
 
-浏览器访问：http://127.0.0.1:8888/index ， 一个简单页面，可测试json提交和json返回
+浏览器访问：<http://127.0.0.1:8888/index> ， 一个简单页面，可测试json提交和json返回
 
-## 3.2 udp测试
+### 3.3 udp测试
 
 ```bash
 # 使用python的udp客户端测试，脚本见test/udp-client.py，如下有2个pod在运行，可以看到两个pod都在返回
