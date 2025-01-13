@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-demo
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-demo
+  template:
+    metadata:
+      labels:
+        app: flask-demo
+    spec:
+      containers:
+      - name: container-0
+        image: harbor.abc.com/sre/flask-demo:v0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8888
+          name: http
+          protocol: TCP
+        - containerPort: 9999
+          name: http
+          protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-demo-nodeport
+  namespace: monitoring
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+    nodeport: 30010
+  - name: udp
+    port: 9999
+    protocol: TCP
+    targetPort: udp
+    nodeport: 30020
+  selector:
+    app: flask-demo
+  type: NodePort
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: flask-demo
+  namespace: monitoring
+spec:
+  entryPoints:
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`abc.abc.com`) 
+    services:
+    - kind: Service
+      name: flask-demo
+      passHostHeader: true
+      port: http
+  tls:
+    domains:
+    - main: '*.abc.com'
+    secretName: abc.com
