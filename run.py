@@ -36,16 +36,16 @@ def udp_server(host, port):
         # udp_sock.sendto(data, addr)
 
 
-def run_tcp_server():
+def run_tcp_server(host, port):
     """
     启动 TCP 服务器
     """
     app.debug = True
 
     server = pywsgi.WSGIServer(
-        listener = ('0.0.0.0', 8888),
+        listener = (host, port),
         application=app)
-    print("TCP server started on 0.0.0.0:8888")
+    print("TCP server started on {}:{}".format(host, port))
     server.serve_forever()
     
 
@@ -55,5 +55,5 @@ if __name__ == '__main__':
     print("UDP server started on 0.0.0.0:9999")
     udp_thread.start()
 
-    # 启动 TCP 服务（主线程）
-    run_tcp_server()
+    # 启动 TCP 服务线程
+    run_tcp_server('0.0.0.0', 8888)
