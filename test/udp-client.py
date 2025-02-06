@@ -10,7 +10,7 @@ while i < 10000:
     # 发送数据:
     print('send   :', i)
     s.sendto(str(i).encode('utf-8'), ('127.0.0.1', 9999))
-    print('recvice:', s.recv(1024).decode('utf-8'))
+    print('receive:', s.recv(1024).decode('utf-8'))
     # 接收数据:
     i += 1
     time.sleep(0.1)

@@ -60,17 +60,17 @@ curl https://****.com/hostname
 # 使用python的udp客户端测试，脚本见test/udp-client.py，如下有2个pod在运行，可以看到两个pod都在返回
 ～ python3 test/udp-client.py
 send   : 0
-recvice: my ip is 10.42.215.235
+receive: my ip is 10.42.215.235
 send   : 1
-recvice: my ip is 10.42.215.235
+receive: my ip is 10.42.215.235
 send   : 2
-recvice: my ip is 10.42.215.235
+receive: my ip is 10.42.215.235
 send   : 3
-recvice: my ip is 10.42.8.166
+receive: my ip is 10.42.8.166
 send   : 4
-recvice: my ip is 10.42.8.166
+receive: my ip is 10.42.8.166
 send   : 5
-recvice: my ip is 10.42.215.235
+receive: my ip is 10.42.215.235
 send   : 6
-recvice: my ip is 10.42.8.166
+receive: my ip is 10.42.8.166
 ```
